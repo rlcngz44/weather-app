@@ -7,15 +7,20 @@ request({ url: url, json: true }, (error, response) => {
   //   console.log(response.body.current);
   const temp = response.body.current.temperature;
   const feelsLike = response.body.current.feelslike;
-  console.log(
-    response.body.current.weather_descriptions[0] +
-      ". It is currently " +
-      temp +
-      " degrees out. It feels like " +
-      feelsLike +
-      " degrees."
-  );
+  //   console.log(
+  //     response.body.current.weather_descriptions[0] +
+  //       ". It is currently " +
+  //       temp +
+  //       " degrees out. It feels like " +
+  //       feelsLike +
+  //       " degrees."
+  //   );
 });
 
-//Challenge! Print a small forecast to the user.\
-//1. Print "It is currently 29 degrees out. There is 0% chance of rain"
+const geocodeURL =
+  "https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1Ijoicmxjbmd6NDQiLCJhIjoiY2w2dWh5NmVmMWVoMjNkdGNyb2h3eHM1MiJ9.B5vbxTjkEWesLnXm6X1Pew&limit=1";
+request({ url: geocodeURL, json: true }, (error, response) => {
+  const longitude = response.body.features[0].center[0];
+  const latitude = response.body.features[0].center[1];
+  console.log(longitude, latitude);
+});
